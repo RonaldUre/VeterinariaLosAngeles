@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+
+				<div th:object="${mascota}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+						<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+
+				<form class="row g-3" th:action="@{/mascota/formMascota}" th:object="${mascota}"
+					method="post" enctype="multipart/form-data">
+
+					<div class="form-group">
+						<label class="col-sm-2 col-form-label">nombre</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{nombre}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-form-label">Raza</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{raza}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('raza')}" th:errors="*{raza}"></small>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-form-label">Peso</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{peso}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}"></small>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 col-form-label">estatura</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" th:field="*{estatura}"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('estatura')}" th:errors="*{estatura}"></small>
+						</div>
+					</div>
+
+				<div class="form-group">
+						<label class="col-sm-2 col-form-label">Cliente</label>
+						<div class="col-sm-8">
+							
+								<input name="cliente"
+								th:value="${mascota.cliente.nombre} + ' ' + ${mascota.cliente.apellido}"
+								class="form-control" disabled='disabled' />
+								
+								<small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"></small>
+						</div>
+					</div>
+					
+						<div class="form-group">
+						<label class="col-sm-2 col-form-label">Fecha Nacimiento</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" th:field="*{fechaNacimiento}"
+								th:errorclass="'form-control alert-danger'" th:value="${mascota.cliente.nombre}"/> 
+								<small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></small>
+						</div>
+					</div>
+
+					<div class="form-group ">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar" class="btn btn-success" /> <input
+						type="hidden" th:field="*{id}" />
+						</div>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+
+				<h4 class="card-title">
+				<!-- 	<a sec:authorize="hasRole('ROLE_ADMIN')"
+						class="btn btn-primary btn-xs" th:href="@{/mascota/formMascota}"> Crear
+						Mascota</a> -->
+				</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th sec:authorize="hasRole('ROLE_USER')">Id</th>
+							<th>Nombre</th>
+							<th>Raza</th>
+							<th>Peso</th>
+							<th>Estatura</th>
+							<th>Cliente</th>
+							<th>Fecha Nacimiento</th>
+							<th>Crear historia</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="mascota: ${mascotas}">
+							<!--<td sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-primary btn-xs"
+								th:href="@{/ver/}+${cliente.id}" th:text="${cliente.id}"></a></td>-->
+							<td sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-primary btn-xs"
+								th:href="@{/mascota/ver/}+${mascota.id}" th:text="${mascota.id}"></a></td>
+							<td th:text="${mascota.nombre}"></td>
+							<td th:text="${mascota.raza}"></td>
+							<td th:text="${mascota.peso}"></td>
+							<td th:text="${mascota.estatura}"></td>
+							<td th:text="${mascota.cliente.nombre}"></td>
+							<td th:text="${mascota.fechaNacimiento}"></td>
+
+						<td  sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs"
+								th:href="@{/historia/form/} + ${mascota.id}" >Crear Historia</a></td>
+
+							<td  sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-success btn-xs"
+								th:href="@{/mascota/formMascota/editar/} + ${mascota.id}" th:text="Editar"}></a></td>
+							<td  sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs"
+								th:href="@{/mascota/eliminar/} + ${mascota.id}" th:text="Eliminar"
+								} onclick="return confirm('Estas seguro que quiere eliminar?');"></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
