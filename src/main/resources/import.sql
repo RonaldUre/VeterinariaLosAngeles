@@ -65,31 +65,31 @@ INSERT INTO clientes(id, nombre, apellido, email, create_at, foto) VALUES(63,'Gl
 
 
 /*Populate tabla producto*/
-INSERT INTO productos (nombre, precio, create_at) VALUES ('Vacuna antirrabica', 250, NOW());
-INSERT INTO productos (nombre, precio, create_at) VALUES ('Vacuna sextuple', 300, NOW());
-INSERT INTO productos (nombre, precio, create_at) VALUES ('desparasitar', 50, NOW());
-INSERT INTO productos (nombre, precio, create_at) VALUES ('Pipeta antipulgas' , 50, NOW());
-INSERT INTO productos (nombre, precio, create_at) VALUES ('Esterelizacion', 500, NOW());
-INSERT INTO productos (nombre, precio, create_at) VALUES ('Hematologia', 100,NOW());
-INSERT INTO productos (nombre, precio, create_at) VALUES ('Servicio Peluqueria', 100, NOW());
+INSERT INTO productos (id,nombre, precio, create_at) VALUES (1,'Vacuna antirrabica', 250, NOW());
+INSERT INTO productos (id,nombre, precio, create_at) VALUES (2,'Vacuna sextuple', 300, NOW());
+INSERT INTO productos (id,nombre, precio, create_at) VALUES (3,'desparasitar', 50, NOW());
+INSERT INTO productos (id,nombre, precio, create_at) VALUES (4,'Pipeta antipulgas' , 50, NOW());
+INSERT INTO productos (id,nombre, precio, create_at) VALUES (5,'Esterelizacion', 500, NOW());
+INSERT INTO productos (id,nombre, precio, create_at) VALUES (6,'Hematologia', 100,NOW());
+INSERT INTO productos (id,nombre, precio, create_at) VALUES (7,'Servicio Peluqueria', 100, NOW());
 
 /* Creamos algunas facturas */
-INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura equipos de oficina', null, 1, NOW());
+INSERT INTO facturas (id, descripcion, observacion, cliente_id, create_at) VALUES(1, 'Factura equipos de oficina', null, 1, NOW());
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 1);  
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(2, 1, 4);  
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 5);  
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 7);  
 
 
-INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura Bicicleta', 'Alguna nota importante!', 1, NOW());
+INSERT INTO facturas (id, descripcion, observacion, cliente_id, create_at) VALUES(2,'Factura Bicicleta', 'Alguna nota importante!', 1, NOW());
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(3, 2, 6);
 
 
 
 /*creamos algunos usuarios con sus roles*/
 
-INSERT INTO `users` (username, password, enable) VALUES ('ronald','$2a$10$pRjFJ7nw7Zy4FFgE2YzZcuFFmxxkAr4NQ5GAvdJN4OE3Mh7dUWqVa',1);
-INSERT INTO `users` (username, password, enable) VALUES ('admin','$2a$10$0VGpd.owMXpcPfUQQ453dusPpislijkE0MhoC10HBTx/8mYcyvCp6',1);
+INSERT INTO `users` (id,username, password, enable) VALUES (1,'ronald','$2a$10$pRjFJ7nw7Zy4FFgE2YzZcuFFmxxkAr4NQ5GAvdJN4OE3Mh7dUWqVa',1);
+INSERT INTO `users` (id,username, password, enable) VALUES (2,'admin','$2a$10$0VGpd.owMXpcPfUQQ453dusPpislijkE0MhoC10HBTx/8mYcyvCp6',1);
 
 INSERT INTO `authorities` (user_id, authority) VALUES (1, 'ROLE_USER');
 INSERT INTO `authorities` (user_id, authority) VALUES (2, 'ROLE_ADMIN');
